@@ -5,6 +5,8 @@ Syntax highlighting for the [Cedar policy language](https://www.cedarpolicy.com/
 Fenced code blocks tagged `cedar` (policies) or `cedarschema` (schemas, in the human-readable schema format)
 are highlighted in **Live Preview**, **Source mode** and **Reading view**, using your theme's code colours.
 
+![A Cedar policy and a Cedar schema highlighted in an Obsidian note](docs/screenshot.png)
+
 ````markdown
 ```cedar
 permit (
@@ -24,6 +26,9 @@ namespace PhotoApp {
 }
 ```
 ````
+
+Like Obsidian's built-in languages, code blocks inside blockquotes and callouts are highlighted in Reading
+view only, not in the editor.
 
 ## How it works
 
