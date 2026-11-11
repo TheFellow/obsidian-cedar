@@ -1,9 +1,4 @@
-# Cedar highlighting check
-
-Open this note in **Live Preview**, **Source mode** and **Reading view**; all three should colour the
-blocks below the same way, using your theme's code colours.
-
-## Policy
+# Policy
 
 ```cedar
 // Alice can view photos in her vacation album, unless they're private.
@@ -21,7 +16,7 @@ forbid (principal == ?principal, action, resource in ?resource)
 when { decimal("1.5").lessThan(decimal("2.0")) };
 ```
 
-## Schema
+# Schema
 
 ```cedarschema
 @doc("this is the namespace")
@@ -48,13 +43,17 @@ namespace TinyTodo {
 }
 ```
 
-## Inside a blockquote
+# Inside a blockquote
 
 > ```cedar
 > permit (principal, action, resource) when { context.ok };
 > ```
 
-## Unaffected
+> ```cedarschema
+> namespace TinyTodo { type Task; }
+> ```
+
+# Unaffected
 
 ```js
 const notCedar = "should still highlight as JavaScript";

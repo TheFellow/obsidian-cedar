@@ -19,6 +19,9 @@ declare global {
 
 const languages = Object.keys(LANGUAGES) as Language[];
 
+/** A ```cedar / ~~~cedarschema fence, also inside blockquotes and lists. */
+const CEDAR_FENCE = /^[ \t>*+\-\d.)]*(`{3,}|~{3,})[ \t]*cedar(schema)?\b/im;
+
 export default class CedarPlugin extends Plugin {
 	override async onload() {
 		const tokenizer = new Tokenizer();
@@ -39,15 +42,31 @@ export default class CedarPlugin extends Plugin {
 		const prism = (await loadPrism()) as PrismLike;
 		this.register(registerPrism(prism, tokenizer, languages));
 
-		// Re-render notes already open in Reading view when the plugin is enabled or disabled mid-session.
-		// (Open editors pick up the modes for code blocks they parse from now on.)
-		this.app.workspace.onLayoutReady(() => this.rerenderReadingViews());
-		this.register(() => this.rerenderReadingViews());
+		// Notes open before the plugin loaded already chose a mode for their code blocks: an unknown
+		// language gets CodeMirror's plain-text mode, and that choice lives in the editor's saved parse
+		// state. Obsidian re-highlights once after loading its own bundled modes, which usually happens
+		// before community plugins load, so re-highlight notes with Cedar blocks now (and again on unload
+		// so they go back to plain text).
+		this.app.workspace.onLayoutReady(() => this.rehighlight());
+		this.register(() => this.rehighlight());
 	}
 
-	private rerenderReadingViews() {
-		this.app.workspace.iterateAllLeaves((leaf) => {
-			if (leaf.view instanceof MarkdownView) leaf.view.previewMode.rerender(true);
-		});
+	private rehighlight() {
+		for (const leaf of this.app.workspace.getLeavesOfType("markdown")) {
+			const view = leaf.view;
+			if (!(view instanceof MarkdownView)) continue; // deferred tabs parse when first shown
+			if (!CEDAR_FENCE.test(view.editor.getValue())) continue;
+			view.previewMode.rerender(true);
+			const editMode = (view as unknown as { editMode?: { resetSyntaxHighlighting?(): void } }).editMode;
+			if (typeof editMode?.resetSyntaxHighlighting === "function") {
+				// What Obsidian itself calls after loading late language modes (not in the public API).
+				editMode.resetSyntaxHighlighting();
+			} else {
+				// Public-API fallback: reopen the note in the same tab.
+				const state = leaf.getViewState();
+				const eState = leaf.getEphemeralState();
+				void leaf.setViewState({ type: "empty" }).then(() => leaf.setViewState(state, eState));
+			}
+		}
 	}
 }
