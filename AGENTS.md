@@ -20,6 +20,9 @@ reference for scope → colour decisions.
 
 ## Rules
 
+- `npm run lint` must pass with zero warnings. It runs `eslint-plugin-obsidianmd`'s recommended config, the
+  same rules the community directory's automated review uses (pinned to the scanner's version; bump it when
+  the directory moves on). The scanner treats regex lookbehind in source as an error.
 - Follow the [Obsidian plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines): no
   global `app`, no `innerHTML`, no console noise, no default hotkeys, sentence case in UI text.
 - `manifest.json` `id` is `cedar` and must never change (it's the install folder name).
@@ -32,6 +35,7 @@ reference for scope → colour decisions.
 
 ```sh
 mise install && npm ci
+npm run lint
 npm test
 npm run build
 ```

@@ -25,6 +25,7 @@ jobs:
         run: |
           version=$(node -p "require('./manifest.json').version")
           test "$version" = "$GITHUB_REF_NAME" || { echo "tag $GITHUB_REF_NAME != manifest $version"; exit 1; }
+      - run: npm run lint
       - run: npm run build
       - run: npm test
       - uses: actions/attest-build-provenance@v4

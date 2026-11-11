@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Fix an unsafe `any` assignment reported by the community directory's review.
+- Lint with Obsidian's official ESLint rules (`npm run lint`) in CI and before releases.
+
 ## 0.1.1
 
 - Mark unknown string escapes with a dashed underline (a border) instead of `text-decoration`, which older

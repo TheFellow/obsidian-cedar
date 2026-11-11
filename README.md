@@ -72,6 +72,7 @@ Tools are pinned in `mise.toml` (Node 22).
 
 ```sh
 npm install
+npm run lint                # Obsidian's official ESLint rules (what the directory's review runs)
 npm test                    # tokenizer, editor mode and Prism tests
 npm run build               # type-check and bundle main.js
 scripts/dev-vault.sh        # build and link the plugin into test-vault/ (or a vault given as $1)

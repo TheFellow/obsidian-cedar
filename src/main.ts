@@ -64,7 +64,7 @@ export default class CedarPlugin extends Plugin {
 			} else {
 				// Public-API fallback: reopen the note in the same tab.
 				const state = leaf.getViewState();
-				const eState = leaf.getEphemeralState();
+				const eState: unknown = leaf.getEphemeralState();
 				void leaf.setViewState({ type: "empty" }).then(() => leaf.setViewState(state, eState));
 			}
 		}

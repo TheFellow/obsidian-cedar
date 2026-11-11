@@ -3,7 +3,7 @@ import { StringStream } from "@codemirror/language";
 import Prism from "prismjs";
 import { describe, expect, it } from "vitest";
 import { streamMode } from "../src/editor-mode";
-import { registerPrism, type PrismLike } from "../src/reading-view";
+import { registerPrism } from "../src/reading-view";
 import { Tokenizer, type Language } from "../src/tokenizer";
 
 const tokenizer = new Tokenizer();
@@ -136,7 +136,7 @@ describe("editor mode (CodeMirror StringStream, as Obsidian's HyperMD calls it)"
 
 describe("reading view (Prism hook)", () => {
 	it("renders Prism token spans for both languages and unregisters cleanly", () => {
-		const undo = registerPrism(Prism as unknown as PrismLike, tokenizer, ["cedar", "cedarschema"]);
+		const undo = registerPrism(Prism, tokenizer, ["cedar", "cedarschema"]);
 		const html = Prism.highlight('forbid (principal, action, resource) when { x < "<b>" };', Prism.languages.cedar, "cedar");
 		expect(html).toContain('<span class="token keyword cedar-keyword">forbid</span>');
 		expect(html).toContain("&lt;b>"); // content is escaped
