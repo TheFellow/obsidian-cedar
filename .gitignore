@@ -1,0 +1,7 @@
+node_modules/
+main.js
+*.map
+.DS_Store
+# test vault: keep the note and the enabled-plugins list, not Obsidian's local state or the linked build
+test-vault/.obsidian/*
+!test-vault/.obsidian/community-plugins.json

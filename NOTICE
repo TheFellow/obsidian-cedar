@@ -1,0 +1,13 @@
+Cedar for Obsidian
+Copyright Cedar Contributors
+
+The TextMate grammars in syntaxes/ are copied unmodified from cedar-policy/vscode-cedar
+(https://github.com/cedar-policy/vscode-cedar), Copyright Cedar Contributors, licensed under the Apache
+License, Version 2.0. Test fixtures in test/fixtures/ are taken from that project's testdata/.
+
+The released main.js bundles:
+- @shikijs/vscode-textmate (https://github.com/shikijs/vscode-textmate), MIT License, a fork of
+  microsoft/vscode-textmate, Copyright Microsoft Corporation.
+- @shikijs/engine-javascript (https://github.com/shikijs/shiki), MIT License, Copyright Pine Wu and
+  Anthony Fu, and its dependencies oniguruma-to-es, oniguruma-parser, regex, regex-recursion and
+  regex-utilities (https://github.com/slevithan), MIT License, Copyright Steven Levithan.

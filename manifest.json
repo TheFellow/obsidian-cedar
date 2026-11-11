@@ -1,0 +1,10 @@
+{
+	"id": "cedar",
+	"name": "Cedar",
+	"version": "0.1.0",
+	"minAppVersion": "1.5.0",
+	"description": "Syntax highlighting for Cedar policy language and Cedar schema code blocks, using the grammars from the official Cedar VS Code extension.",
+	"author": "TheFellow",
+	"authorUrl": "https://github.com/TheFellow",
+	"isDesktopOnly": false
+}
