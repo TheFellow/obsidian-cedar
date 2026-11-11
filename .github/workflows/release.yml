@@ -29,7 +29,10 @@ jobs:
       - run: npm test
       - uses: actions/attest-build-provenance@v4
         with:
-          subject-path: main.js
+          subject-path: |
+            main.js
+            manifest.json
+            styles.css
       - name: Create draft release
         env:
           GH_TOKEN: ${{ github.token }}
