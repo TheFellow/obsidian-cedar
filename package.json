@@ -1,6 +1,6 @@
 {
   "name": "obsidian-cedar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Cedar policy language syntax highlighting for Obsidian",
   "private": true,
   "type": "module",
